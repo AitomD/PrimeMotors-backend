@@ -7,7 +7,6 @@ generator client {
   provider = "prisma-client-js"
 }
 
-// --- ENUMS (Padronização de dados) ---
 
 enum CarStatus {
   Entregue
@@ -24,10 +23,10 @@ enum FuelType {
   Eletrico
 }
 
-// --- MODELOS ---
 
 model User {
   id       String   @id @default(uuid())
+  name     String   
   email    String   @unique
   cpf      String   @unique
   password String
@@ -81,7 +80,7 @@ model Itens {
 model Espec {
   id           String   @id @default(uuid())
   year         Int
-  fuel         FuelType @default(Gasolina) // Agora usando o Enum seguro
+  fuel         FuelType @default(Gasolina) 
   color        String
   transmission String
   engine       String

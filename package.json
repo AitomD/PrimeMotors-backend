@@ -20,6 +20,7 @@
   "homepage": "https://github.com/AitomD/BackEnd2026#readme",
   "dependencies": {
     "@prisma/client": "6.0.0",
+    "@types/bcrypt": "^6.0.0",
     "bcryptjs": "^3.0.3",
     "bscript": "^0.1.0",
     "cors": "^2.8.6",

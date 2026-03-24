@@ -10,7 +10,7 @@ app.use(cors({
 
 app.use(express.json()); // Permite que o express entenda o JSON no body da requisição
 
-const port = Number(process.env.PORT) || 3001; // Usa a porta do .env ou 3001 como fallback
+const port = Number(process.env.PORT) || 3000; 
 
 app.get('/', (req, res) => {
   res.json({ message: "Backend rodando com sucesso!" });
