@@ -1,0 +1,118 @@
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+
+enum CarStatus {
+  Entregue
+  Pendente
+  Processando
+}
+
+enum FuelType {
+  Gasolina
+  Alcool
+  Flex
+  Diesel
+  Hibrido
+  Eletrico
+}
+
+
+model User {
+  id       String   @id @default(uuid())
+  name     String   
+  email    String   @unique
+  cpf      String   @unique
+  cep      String
+  password String
+  number   String   @unique
+  active   Boolean  @default(true)
+  garages  Garage[]
+}
+
+model Car {
+  id              String    @id @default(uuid())
+  name            String
+  model           String
+  value           Decimal   @db.Decimal(10, 2)
+  status          CarStatus @default(Processando)
+  date_registered DateTime  @default(now())
+
+  // Chaves Estrangeiras Físicas
+  brandId String
+  especId String @unique
+  itensId String @unique
+
+  // Relações (Prisma)
+  // O 'onDelete: Cascade' apaga a ficha técnica se o carro for deletado
+  brand Brand @relation(fields: [brandId], references: [id])
+  espec Espec @relation(fields: [especId], references: [id], onDelete: Cascade)
+  itens Itens @relation(fields: [itensId], references: [id], onDelete: Cascade)
+
+  images  Image[]
+  cons    Cons[]
+  garages Garage[]
+}
+
+model Brand {
+  id   String @id @default(uuid())
+  name String @unique
+  cars Car[]
+}
+
+model Itens {
+  id                String  @id @default(uuid())
+  airbag            Boolean @default(false)
+  alarme            Boolean @default(false)
+  banco_de_couro    Boolean @default(false)
+  controle_cruzeiro Boolean @default(false)
+  abs               Boolean @default(false)
+  computador_bordo  Boolean @default(false)
+  
+  car Car? // Relação 1:1 inversa
+}
+
+model Espec {
+  id           String   @id @default(uuid())
+  year         Int
+  fuel         FuelType @default(Gasolina) 
+  color        String
+  transmission String
+  engine       String
+  potency      String
+  max_speed    String
+  
+  car Car? // Relação 1:1 inversa
+}
+
+model Cons {
+  id    String @id @default(uuid())
+  name  String
+  carId String
+  car   Car    @relation(fields: [carId], references: [id], onDelete: Cascade)
+}
+
+model Image {
+  id    String @id @default(uuid())
+  url   String
+  carId String
+  car   Car    @relation(fields: [carId], references: [id], onDelete: Cascade)
+}
+
+model Garage {
+  id       String   @id @default(uuid())
+  date_buy DateTime @default(now())
+
+  carId  String
+  userId String
+
+  car  Car  @relation(fields: [carId], references: [id])
+  user User @relation(fields: [userId], references: [id])
+}
+
