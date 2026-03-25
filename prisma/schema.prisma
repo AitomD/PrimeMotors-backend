@@ -115,3 +115,5 @@ model Garage {
   car  Car  @relation(fields: [carId], references: [id])
   user User @relation(fields: [userId], references: [id])
 }
+
+
