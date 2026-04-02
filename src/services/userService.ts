@@ -41,10 +41,8 @@ export const getUserByIdService = async (id: string) => {
             email: true,
             cpf: true,
             cep: true,
-            number: true,
-            active: true
-        }
-        
+            number: true
+        }    
     });
 };
 

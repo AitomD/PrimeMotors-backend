@@ -2,6 +2,10 @@ import 'dotenv/config';
 import express from 'express';
 import cors from 'cors';
 import authRoutes from './routes/authRoutes'; 
+import userRoutes from './routes/userRoutes';
+import { authMiddleware } from './middlewares/authMiddleware';
+import { getUserController } from './controllers/userController';
+
 
 const app = express();
 
@@ -17,6 +21,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/auth', authRoutes);
+app.use('/users', userRoutes);
 
 export default app;
 
