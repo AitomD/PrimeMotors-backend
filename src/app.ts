@@ -4,7 +4,7 @@ import cors from 'cors';
 import authRoutes from './routes/authRoutes'; 
 import userRoutes from './routes/userRoutes';
 import { authMiddleware } from './middlewares/authMiddleware';
-import { getUserController } from './controllers/userController';
+import { getUserController, updateUserController } from './controllers/userController';
 
 
 const app = express();
@@ -22,6 +22,7 @@ app.get('/', (req, res) => {
 
 app.use('/auth', authRoutes);
 app.use('/users', userRoutes);
+app.patch('/:id', authMiddleware, updateUserController);
 
 export default app;
 
