@@ -1,5 +1,6 @@
 import prisma from '../config/database';
 import bcrypt from 'bcrypt';
+import { Request, Response } from 'express';
 
 export const createUserService = async (data:any) => {
     const saltRounds = 10;
@@ -46,6 +47,20 @@ export const getUserByIdService = async (id: string) => {
     });
 };
 
+export const deleteUserController = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params; // Agora o TS reconhecerá o params
+    
+    await prisma.user.update({
+      where: { id: id as string },
+      data: { active: false } 
+    });
+
+    return res.status(200).json({ message: "Usuário desativado com sucesso!" });
+  } catch (error) {
+    return res.status(500).json({ message: "Erro ao desativar usuário." });
+  }
+};
 
 
 
