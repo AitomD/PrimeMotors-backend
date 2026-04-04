@@ -8,6 +8,7 @@ export const createUserService = async (data:any) => {
     const hashedPassword = await bcrypt.hash(data.password,saltRounds) 
 
     const existingUser = await prisma.user.findUnique({where:{email: data.email}});
+    
     if(existingUser) {
         throw new Error ('E-mail já cadastrado!');
     }
