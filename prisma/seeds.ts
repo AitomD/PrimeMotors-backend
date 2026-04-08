@@ -46,11 +46,11 @@ async function main() {
 
       itens: {
         airbag: true,
-        alarme: true,
-        banco_de_couro: true,
-        controle_cruzeiro: true,
+        alarm: true,
+        leather_seat: true,
+        cruise_control: true,
         abs: true,
-        computador_bordo: true
+        onBoard_computer: true
       },
 
       images: [
@@ -79,11 +79,11 @@ async function main() {
 
       itens: {
         airbag: true,
-        alarme: true,
-        banco_de_couro: true,
-        controle_cruzeiro: true,
+        alarm: true,
+        leather_seat: true,
+        cruise_control: true,
         abs: true,
-        computador_bordo: true
+        onBoard_computer: true
       },
 
       images: [
@@ -112,11 +112,11 @@ async function main() {
 
       itens: {
         airbag: true,
-        alarme: true,
-        banco_de_couro: true,
-        controle_cruzeiro: true,
+        alarm: true,
+        leather_seat: true,
+        cruise_control: true,
         abs: true,
-        computador_bordo: true
+        onBoard_computer: true
       },
 
       images: [
@@ -145,11 +145,11 @@ async function main() {
 
       itens: {
         airbag: true,
-        alarme: true,
-        banco_de_couro: true,
-        controle_cruzeiro: true,
+        alarm: true,
+        leather_seat: true,
+        cruise_control: true,
         abs: true,
-        computador_bordo: true
+        onBoard_computer: true
       },
 
       images: [
@@ -177,11 +177,11 @@ async function main() {
 
       itens: {
         airbag: true,
-        alarme: true,
-        banco_de_couro: true,
-        controle_cruzeiro: true,
+        alarm: true,
+        leather_seat: true,
+        cruise_control: true,
         abs: true,
-        computador_bordo: true
+        onBoard_computer: true
       },
 
       images: [
@@ -210,11 +210,11 @@ async function main() {
 
       itens: {
         airbag: true,
-        alarme: true,
-        banco_de_couro: true,
-        controle_cruzeiro: true,
+        alarm: true,
+        leather_seat: true,
+        cruise_control: true,
         abs: true,
-        computador_bordo: true
+        onBoard_computer: true
       },
 
       images: [
@@ -243,11 +243,11 @@ async function main() {
 
       itens: {
         airbag: true,
-        alarme: true,
-        banco_de_couro: true,
-        controle_cruzeiro: true,
+        alarm: true,
+        leather_seat: true,
+        cruise_control: true,
         abs: true,
-        computador_bordo: true
+        onBoard_computer: true
       },
 
       images: [
@@ -276,11 +276,11 @@ async function main() {
 
       itens: {
         airbag: true,
-        alarme: true,
-        banco_de_couro: true,
-        controle_cruzeiro: true,
+        alarm: true,
+        leather_seat: true,
+        cruise_control: true,
         abs: true,
-        computador_bordo: true
+        onBoard_computer: true
       },
 
       images: [
@@ -309,11 +309,11 @@ async function main() {
 
       itens: {
         airbag: true,
-        alarme: true,
-        banco_de_couro: true,
-        controle_cruzeiro: true,
+        alarm: true,
+        leather_seat: true,
+        cruise_control: true,
         abs: true,
-        computador_bordo: true
+        onBoard_computer: true
       },
 
       images: [
@@ -342,11 +342,11 @@ async function main() {
 
       itens: {
         airbag: true,
-        alarme: true,
-        banco_de_couro: true,
-        controle_cruzeiro: true,
+        alarm: true,
+        leather_seat: true,
+        cruise_control: true,
         abs: true,
-        computador_bordo: true
+        onBoard_computer: true
       },
 
       images: [
@@ -375,11 +375,11 @@ async function main() {
 
       itens: {
         airbag: true,
-        alarme: true,
-        banco_de_couro: true,
-        controle_cruzeiro: true,
+        alarm: true,
+        leather_seat: true,
+        cruise_control: true,
         abs: true,
-        computador_bordo: true
+        onBoard_computer: true
       },
 
       images: [

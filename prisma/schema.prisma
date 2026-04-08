@@ -7,7 +7,6 @@ generator client {
   provider = "prisma-client-js"
 }
 
-
 enum CarStatus {
   Entregue
   Pendente
@@ -23,17 +22,17 @@ enum FuelType {
   Eletrico
 }
 
-
 model User {
-  id       String   @id @default(uuid())
-  name     String   
-  email    String   @unique
-  cpf      String   @unique
-  cep      String
-  password String
-  number   String?  
-  active   Boolean  @default(true)
-  garages  Garage[]
+  id        String     @id @default(uuid())
+  name      String
+  email     String     @unique
+  cpf       String     @unique
+  cep       String
+  password  String
+  number    String?
+  active    Boolean    @default(true)
+  garages   Garage[]
+  favorites Favorite[]
 }
 
 model Car {
@@ -55,8 +54,9 @@ model Car {
   espec Espec @relation(fields: [especId], references: [id], onDelete: Cascade)
   itens Itens @relation(fields: [itensId], references: [id], onDelete: Cascade)
 
-  images  Image[]
-  garages Garage[]
+  images    Image[]
+  garages   Garage[]
+  favorites Favorite[]
 }
 
 model Brand {
@@ -66,30 +66,29 @@ model Brand {
 }
 
 model Itens {
-  id                String  @id @default(uuid())
-  airbag            Boolean @default(false)
-  alarm           Boolean @default(false)
-  leather_seat    Boolean @default(false)
-  cruise_control Boolean @default(false)
-  abs               Boolean @default(false)
+  id               String  @id @default(uuid())
+  airbag           Boolean @default(false)
+  alarm            Boolean @default(false)
+  leather_seat     Boolean @default(false)
+  cruise_control   Boolean @default(false)
+  abs              Boolean @default(false)
   onBoard_computer Boolean @default(false)
-  
+
   car Car? // Relação 1:1 inversa
 }
 
 model Espec {
   id           String   @id @default(uuid())
   year         Int
-  fuel         FuelType @default(Gasolina) 
+  fuel         FuelType @default(Gasolina)
   color        String
   transmission String
   engine       String
   potency      String
   max_speed    String
-  
+
   car Car? // Relação 1:1 inversa
 }
-
 
 model Image {
   id    String @id @default(uuid())
@@ -109,3 +108,18 @@ model Garage {
   user User @relation(fields: [userId], references: [id])
 }
 
+model Favorite {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+
+  // Chaves Estrangeiras
+  userId String
+  carId  String
+
+  // Relações
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  car  Car  @relation(fields: [carId], references: [id], onDelete: Cascade)
+
+  // Índice composto para garantir que um user não favorite o mesmo carro 2x
+  @@unique([userId, carId])
+}
