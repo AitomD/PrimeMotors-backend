@@ -6,11 +6,12 @@ import bcrypt from 'bcrypt';
 
 export const getUserController = async (req: Request, res: Response) => {
   const { id } = req.params; 
-  if (!id || id === "undefined" || id === ":id") {
+  const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+  if (!id || typeof id !== 'string' || !uuidRegex.test(id)) {
     return res.status(400).json({ error: "ID de usuário inválido" });
   }
   try {
-    const user = await getUserByIdService(id as string);
+    const user = await getUserByIdService(id);
     if (!user) {
       return res
         .status(404)
