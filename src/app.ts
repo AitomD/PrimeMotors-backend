@@ -9,6 +9,7 @@ import { getUserController, updateUserController } from './controllers/userContr
 
 
 const app = express();
+app.use(express.json());
 
 
 app.use(cors({
@@ -24,7 +25,6 @@ app.use('/auth', authRoutes);
 app.use('/users', userRoutes);
 
 //Retorna carros card
-app.use(express.json());
 
 // 👉 AQUI
 app.use('/cars', carsRoutes);
