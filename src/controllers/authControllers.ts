@@ -27,6 +27,10 @@ export const login = async (req: Request, res: Response) => {
         .status(401)
         .json({ message: "Usuário inexistente ou desativado." });
     }
+
+    console.log("Secret:", process.env.JWT_SECRET);
+    console.log("Expires:", process.env.JWT_EXPIRES_IN);
+
     const token = jwt.sign(
       { id: user.id, email: user.email },
       process.env.JWT_SECRET as string,
