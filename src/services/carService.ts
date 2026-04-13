@@ -1,6 +1,17 @@
-import { PrismaClient } from "@prisma/client";
+import prisma from "../config/database";
 
-const prisma = new PrismaClient();
+const formatCar = (car: any) => {
+  // Função auxiliar para transformar o objeto de itens em uma lista de nomes
+  const getFeaturesList = (itens: any) => {
+    if (!itens) return [];
+    const labels: Record<string, string> = {
+      airbag: "Airbag",
+      alarm: "Alarme",
+      leather_seat: "Bancos de Couro",
+      cruise_control: "Piloto Automático",
+      abs: "Freios ABS",
+      onBoard_computer: "Computador de Bordo"
+    };
 
 const formatCar = (car: any) => ({
   id: car.id,
@@ -28,7 +39,6 @@ export async function getCars() {
       category: true,
     },
   });
-
   return cars.map(formatCar);
 }
 
@@ -39,27 +49,22 @@ export async function getCarById(id: string) {
       brand: true,
       espec: true,
       images: true,
-      itens: true, // Adicionado para pegar Airbag, ABS, etc.
+      itens: true,
     },
   });
 
   if (!car) return null;
 
+  // Reutilizamos a lógica de formatação para manter o padrão
+  const formatted = formatCar(car);
+
   return {
-    id: car.id,
-    name: car.name,
+    ...formatted,
     model: car.model,
-    brand: car.brand.name,
-    price: Number(car.value),
-    imgUrl: car.images[0]?.url || "",
-    allImages: car.images.map(img => img.url), // Pega todas as fotos
-    year: car.espec.year,
+    allImages: car.images.map((img: any) => img.url),
     status: car.status,
-    // Dados da ficha técnica (Espec)
     specs: {
-      engine: car.espec.engine,
-      fuel: car.espec.fuel,
-      transmission: car.espec.transmission,
+      ...formatted.specs,
       color: car.espec.color,
       potency: car.espec.potency,
       max_speed: car.espec.max_speed,
