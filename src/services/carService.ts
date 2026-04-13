@@ -13,28 +13,22 @@ const formatCar = (car: any) => {
       onBoard_computer: "Computador de Bordo"
     };
 
-    // Filtra apenas as chaves que são 'true' e retorna o nome amigável
-    return Object.keys(labels)
-      .filter(key => itens[key] === true)
-      .map(key => labels[key]);
-  };
-
-  return {
-    id: car.id,
-    name: car.name,
-    brand: car.brand.name,
-    price: Number(car.value),
-    imgUrl: car.images[0]?.url || "",
-    year: car.espec.year,
-    specs: {
-      engine: car.espec.engine,
-      fuel: car.espec.fuel,
-      transmission: car.espec.transmission,
-    },
-    // Agora 'features' será um array de strings: ["Airbag", "Alarme", ...]
-    features: getFeaturesList(car.itens)
-  };
-};
+const formatCar = (car: any) => ({
+  id: car.id,
+  name: car.name,
+  brand: car.brand.name,
+  category: { 
+    name: car.category?.name || "Sem Categoria"
+  },
+  price: Number(car.value),
+  imgUrl: car.images[0]?.url || "",
+  year: car.espec.year,
+  specs: {
+    engine: car.espec.engine,
+    fuel: car.espec.fuel,
+    transmission: car.espec.transmission,
+  },
+});
 
 export async function getCars() {
   const cars = await prisma.car.findMany({
@@ -42,7 +36,7 @@ export async function getCars() {
       brand: true,
       espec: true,
       images: true,
-      itens: true,
+      category: true,
     },
   });
   return cars.map(formatCar);
