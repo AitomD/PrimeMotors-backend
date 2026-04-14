@@ -39,9 +39,9 @@ const formatCar = (car: CarWithRelations) => ({
 });
 
 // 2. Agora os exports estão no nível raiz do arquivo (correto)
-export async function getCars(page = 1, limit = 10) {
+export async function getCars(page = 1, limit = 100) {
   const validPage = Number.isInteger(page) && page > 0 ? page : 1;
-  const validLimit = Number.isInteger(limit) && limit > 0 ? limit : 10;
+  const validLimit = Number.isInteger(limit) && limit > 0 ? limit : 100;
 
   const cars = await prisma.car.findMany({
     skip: (validPage - 1) * validLimit,

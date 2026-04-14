@@ -103,7 +103,7 @@ async function main() {
       value: 7000000,
       categoryName: "Super Esportivo",
       brandName: "Lamborghini",
-      espec: { year: 2024, fuel: FuelType.Gasolina, color: "Viola Pasifae", transmission: "Automático", engine: "6.5 V12 Hybrid", potency: "1015cv", max_speed: "350km/h" },
+      espec: { year: 2024, fuel: FuelType.Hibrido, color: "Viola Pasifae", transmission: "Automático", engine: "6.5 V12 Hybrid", potency: "1015cv", max_speed: "350km/h" },
       itens: { airbag: true, alarm: true, leather_seat: true, cruise_control: true, abs: true, onBoard_computer: true },
       images: ["https://res.cloudinary.com/ddnh19cgy/image/upload/q_auto/f_auto/v1776186901/2026-Novitec-Lamborghini-Revuelto-001-1600_acgplg.jpg",
         "https://res.cloudinary.com/ddnh19cgy/image/upload/q_auto/f_auto/v1776186918/2026-Novitec-Lamborghini-Revuelto-002-1600_uqbj0q.jpg",
@@ -171,7 +171,7 @@ async function main() {
       value: 6900000,
       categoryName: "Super Esportivo",
       brandName: "Ferrari",
-      espec: { year: 2024, fuel: FuelType.Gasolina, color: "Argento Nurburgring", transmission: "Automático", engine: "4.0 V8 Plug-in Hybrid", potency: "1000cv", max_speed: "340km/h" },
+      espec: { year: 2024, fuel: FuelType.Hibrido, color: "Argento Nurburgring", transmission: "Automático", engine: "4.0 V8 Plug-in Hybrid", potency: "1000cv", max_speed: "340km/h" },
       itens: { airbag: true, alarm: true, leather_seat: true, cruise_control: true, abs: true, onBoard_computer: true },
       images: ["https://res.cloudinary.com/ddnh19cgy/image/upload/q_auto/f_auto/v1776187929/2024-Ferrari-SF90-XX-Stradale-001-1600_kxzgpg.jpg",
         "https://res.cloudinary.com/ddnh19cgy/image/upload/q_auto/f_auto/v1776187933/2024-Ferrari-SF90-XX-Stradale-002-1600_nqrwrd.jpg",
@@ -217,7 +217,7 @@ async function main() {
       value: 1200000,
       categoryName: "Esportivo",
       brandName: "Porsche",
-      espec: { year: 2025, fuel: FuelType.Gasolina, color: "Cross Turismo", transmission: "Automático", engine: "Elétrico (800V)", potency: "761cv", max_speed: "260km/h" },
+      espec: { year: 2025, fuel: FuelType.Eletrico, color: "Cross Turismo", transmission: "Automático", engine: "Elétrico (800V)", potency: "761cv", max_speed: "260km/h" },
       itens: { airbag: true, alarm: true, leather_seat: true, cruise_control: true, abs: true, onBoard_computer: true },
       images: ["https://res.cloudinary.com/ddnh19cgy/image/upload/q_auto/f_auto/v1776188379/2025-Porsche-Taycan-Turbo-Cross-Turismo-001-1600_gmjttc.jpg",
         "https://res.cloudinary.com/ddnh19cgy/image/upload/q_auto/f_auto/v1776188386/2025-Porsche-Taycan-Turbo-Cross-Turismo-002-1600_bppu3h.jpg",
@@ -449,7 +449,7 @@ async function main() {
       value: 6500000,
       categoryName: "Luxo",
       brandName: "Rolls-Royce",
-      espec: { year: 2024, fuel: FuelType.Gasolina, color: "Chartreuse", transmission: "Automático", engine: "Elétrico", potency: "584cv", max_speed: "250km/h" },
+      espec: { year: 2024, fuel: FuelType.Eletrico, color: "Chartreuse", transmission: "Automático", engine: "Elétrico", potency: "584cv", max_speed: "250km/h" },
       itens: { airbag: true, alarm: true, leather_seat: true, cruise_control: true, abs: true, onBoard_computer: true },
       images: ["https://res.cloudinary.com/ddnh19cgy/image/upload/q_auto/f_auto/v1776189462/2024-Rolls-Royce-Spectre-001-1600_ft00za.jpg",
         "https://res.cloudinary.com/ddnh19cgy/image/upload/q_auto/f_auto/v1776189467/2024-Rolls-Royce-Spectre-002-1600_vrsrhf.jpg",
@@ -542,7 +542,7 @@ async function main() {
       value: 2000000,
       categoryName: "SUV",
       brandName: "BMW",
-      espec: { year: 2024, fuel: FuelType.Gasolina, color: "Frozen Carbon Black", transmission: "Automático", engine: "4.4 V8 Hybrid", potency: "748cv", max_speed: "290km/h" },
+      espec: { year: 2024, fuel: FuelType.Hibrido, color: "Frozen Carbon Black", transmission: "Automático", engine: "4.4 V8 Hybrid", potency: "748cv", max_speed: "290km/h" },
       itens: { airbag: true, alarm: true, leather_seat: true, cruise_control: true, abs: true, onBoard_computer: true },
       images: ["https://res.cloudinary.com/ddnh19cgy/image/upload/q_auto/f_auto/v1776190021/2024-BMW-XM-Label-Red-005-1600_xebdtf.jpg",
         "https://res.cloudinary.com/ddnh19cgy/image/upload/q_auto/f_auto/v1776190034/2024-BMW-XM-Label-Red-004-1600_v0bkyl.jpg",
@@ -599,7 +599,7 @@ async function main() {
       value: 1900000,
       categoryName: "SUV",
       brandName: "Mercedes-Benz",
-      espec: { year: 2025, fuel: FuelType.Gasolina, color: "Manufactur South Sea Blue", transmission: "Automático", engine: "4.0 V8 Biturbo", potency: "585cv", max_speed: "220km/h" },
+      espec: { year: 2025, fuel: FuelType.Gasolina, color: "South Sea Blue", transmission: "Automático", engine: "4.0 V8 Biturbo", potency: "585cv", max_speed: "220km/h" },
       itens: { airbag: true, alarm: true, leather_seat: true, cruise_control: true, abs: true, onBoard_computer: true },
       images: ["https://res.cloudinary.com/ddnh19cgy/image/upload/q_auto/f_auto/v1776189623/2025-Mercedes-AMG-G63-007-1600_p1npxw.jpg",
         "https://res.cloudinary.com/ddnh19cgy/image/upload/q_auto/f_auto/v1776189590/2025-Mercedes-AMG-G63-005-1600_gji1et.jpg",
@@ -638,16 +638,24 @@ async function main() {
       where: { name: carro.categoryName }
     });
 
+    if (!brand) {
+      throw new Error(`Marca não encontrada: ${carro.brandName}`);
+    }
+
+    if (!category) {
+      throw new Error(`Categoria não encontrada: ${carro.categoryName}`);
+    }
+
     await prisma.car.create({
       data: {
         name: carro.name,
         model: carro.model,
         value: new Prisma.Decimal(carro.value),
 
-        brandId: brand!.id,
+        brandId: brand.id,
         especId: espec.id,
         itensId: itens.id,
-        categoryId: category?.id,
+        categoryId: category.id,
 
         images: {
           create: carro.images.map((url) => ({ url }))
