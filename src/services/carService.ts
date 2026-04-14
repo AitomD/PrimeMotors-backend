@@ -5,8 +5,8 @@ const formatCar = (car: any) => ({
   id: car.id,
   name: car.name,
   brand: car.brand?.name || "Sem Marca",
-  category: { 
-    name: car.category?.name || "Sem Categoria"
+  category: {
+    name: car.category?.name || "Sem Categoria",
   },
   price: Number(car.value),
   imgUrl: car.images[0]?.url || "",
@@ -19,8 +19,13 @@ const formatCar = (car: any) => ({
 });
 
 // 2. Agora os exports estão no nível raiz do arquivo (correto)
-export async function getCars() {
+export async function getCars(page = 1, limit = 10) {
+  const validPage = Number.isInteger(page) && page > 0 ? page : 1;
+  const validLimit = Number.isInteger(limit) && limit > 0 ? limit : 10;
+
   const cars = await prisma.car.findMany({
+    skip: (validPage - 1) * validLimit,
+    take: validLimit,
     include: {
       brand: true,
       espec: true,
@@ -37,7 +42,7 @@ export async function getCarById(id: string) {
       brand: true,
       espec: true,
       images: true,
-      itens: true, 
+      itens: true,
       category: true,
     },
   });
@@ -57,9 +62,9 @@ export async function getCarById(id: string) {
   };
 
   // 2. Transformar o objeto de booleanos em um Array de strings
-  const features = car.itens 
+  const features = car.itens
     ? Object.entries(car.itens)
-        .filter(([key, value]) => value === true && key !== 'id') // Filtra apenas o que é true
+        .filter(([key, value]) => value === true && key !== "id") // Filtra apenas o que é true
         .map(([key]) => itemLabels[key] || key) // Traduz ou usa a chave original
     : [];
 
@@ -74,6 +79,6 @@ export async function getCarById(id: string) {
       color: car.espec.color,
       potency: car.espec.potency,
       max_speed: car.espec.max_speed,
-    }
+    },
   };
 }

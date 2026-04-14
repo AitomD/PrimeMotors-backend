@@ -7,6 +7,11 @@ import {
   updateFavoriteMessage,
 } from "../services/favoriteService";
 
+const parsePaginationParam = (value: unknown, fallback: number) => {
+  const parsed = Number(value);
+  return Number.isInteger(parsed) && parsed > 0 ? parsed : fallback;
+};
+
 const getUserIdFromRequest = (req: Request) => (req as any).user?.id as string;
 
 export const listFavoritesController = async (req: Request, res: Response) => {
@@ -19,7 +24,9 @@ export const listFavoritesController = async (req: Request, res: Response) => {
     return res.status(403).json({ error: "Acesso negado." });
 
   try {
-    const favorites = await getFavoritesByUser(requestedUserId);
+    const page = parsePaginationParam(req.query.page, 1);
+    const limit = parsePaginationParam(req.query.limit, 10);
+    const favorites = await getFavoritesByUser(requestedUserId, page, limit);
     return res.status(200).json(favorites);
   } catch (error) {
     console.error(error);
