@@ -39,8 +39,12 @@ export async function createFavorite(
 ) {
   return prisma.favorite.create({
     data: {
-      userId,
-      carId,
+      user: {
+        connect: { id: userId },
+      },
+      car: {
+        connect: { id: carId },
+      },
       message,
     },
   });

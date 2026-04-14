@@ -1,4 +1,6 @@
 import { Request, Response } from "express";
+import type { ParsedQs } from "qs";
+import { Prisma } from "@prisma/client";
 import {
   createFavorite,
   deleteFavorite,
@@ -7,12 +9,16 @@ import {
   updateFavoriteMessage,
 } from "../services/favoriteService";
 
-const parsePaginationParam = (value: unknown, fallback: number) => {
-  const parsed = Number(value);
+const parsePaginationParam = (
+  value: string | string[] | ParsedQs | undefined,
+  fallback: number,
+) => {
+  const pageString = Array.isArray(value) ? value[0] : value;
+  const parsed = typeof pageString === "string" ? Number(pageString) : NaN;
   return Number.isInteger(parsed) && parsed > 0 ? parsed : fallback;
 };
 
-const getUserIdFromRequest = (req: Request) => (req as any).user?.id as string;
+const getUserIdFromRequest = (req: Request) => req.user?.id;
 
 export const listFavoritesController = async (req: Request, res: Response) => {
   const authenticatedUserId = getUserIdFromRequest(req);
@@ -26,8 +32,9 @@ export const listFavoritesController = async (req: Request, res: Response) => {
   try {
     const page = parsePaginationParam(req.query.page, 1);
     const limit = parsePaginationParam(req.query.limit, 10);
-    const favorites = await getFavoritesByUser(requestedUserId, page, limit);
-    return res.status(200).json(favorites);
+    return res
+      .status(200)
+      .json(await getFavoritesByUser(requestedUserId, page, limit));
   } catch (error) {
     console.error(error);
     return res.status(500).json({ error: "Erro ao buscar lista de desejos." });
@@ -53,9 +60,12 @@ export const toggleFavoriteController = async (req: Request, res: Response) => {
 
     const favorite = await createFavorite(authenticatedUserId, carId, message);
     return res.status(201).json({ message: "Favorito adicionado.", favorite });
-  } catch (error: any) {
+  } catch (error) {
     console.error(error);
-    if (error.code === "P2002")
+    if (
+      error instanceof Prisma.PrismaClientKnownRequestError &&
+      error.code === "P2002"
+    )
       return res.status(409).json({ error: "Favorito já existe." });
     return res
       .status(500)
@@ -74,9 +84,12 @@ export const createFavoriteController = async (req: Request, res: Response) => {
   try {
     const favorite = await createFavorite(authenticatedUserId, carId, message);
     return res.status(201).json(favorite);
-  } catch (error: any) {
+  } catch (error) {
     console.error(error);
-    if (error.code === "P2002")
+    if (
+      error instanceof Prisma.PrismaClientKnownRequestError &&
+      error.code === "P2002"
+    )
       return res.status(409).json({ error: "Favorito já existe." });
     return res.status(500).json({ error: "Erro ao criar favorito." });
   }

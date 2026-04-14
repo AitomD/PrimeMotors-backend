@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import type { UpdateUserInput } from "../types/user";
 import {
   getUserByIdService,
   updateUserService,
@@ -28,25 +29,32 @@ export const getUserController = async (req: Request, res: Response) => {
 
 export const updateUserController = async (req: Request, res: Response) => {
   try {
-    const tokenUserId = (req as any).user?.id as string;
+    const tokenUserId = req.user?.id;
     const id = req.params.id as string;
 
     if (!tokenUserId || tokenUserId !== id) {
       return res.status(403).json({ error: "Acesso negado." });
     }
 
-    const updatedUser = await updateUserService(id, req.body);
+    const updatedUser = await updateUserService(
+      id,
+      req.body as UpdateUserInput,
+    );
     return res.status(200).json(updatedUser);
-  } catch (error: any) {
-    if (error.message === "Usuário não encontrado.") {
+  } catch (error) {
+    if (error instanceof Error && error.message === "Usuário não encontrado.") {
       return res.status(404).json({ message: error.message });
     }
-    if (error.message.includes("Não é permitido alterar o email")) {
+    if (
+      error instanceof Error &&
+      error.message.includes("Não é permitido alterar o email")
+    ) {
       return res.status(400).json({ message: error.message });
     }
     if (
-      error.message.includes("obrigatórios") ||
-      error.message.includes("inválido")
+      error instanceof Error &&
+      (error.message.includes("obrigatórios") ||
+        error.message.includes("inválido"))
     ) {
       return res.status(400).json({ message: error.message });
     }
@@ -56,7 +64,7 @@ export const updateUserController = async (req: Request, res: Response) => {
 
 export const deleteUserController = async (req: Request, res: Response) => {
   try {
-    const tokenUserId = (req as any).user?.id as string;
+    const tokenUserId = req.user?.id;
     const id = req.params.id as string;
 
     if (!tokenUserId || tokenUserId !== id) {
@@ -65,8 +73,8 @@ export const deleteUserController = async (req: Request, res: Response) => {
 
     await deactivateUserService(id);
     return res.status(200).json({ message: "Usuário desativado" });
-  } catch (error: any) {
-    if (error.message === "Usuário não encontrado.") {
+  } catch (error) {
+    if (error instanceof Error && error.message === "Usuário não encontrado.") {
       return res.status(404).json({ message: error.message });
     }
     return res.status(500).json({ message: "Erro ao deletar" });

@@ -1,5 +1,6 @@
 import prisma from "../config/database";
 import bcrypt from "bcrypt";
+import type { CreateUserInput, UpdateUserInput } from "../types/user";
 
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const passwordRegex = /^.{6,}$/;
@@ -25,7 +26,7 @@ const isValidCpf = (cpf: string) => {
   );
 };
 
-const validateNewUser = async (data: any) => {
+const validateNewUser = async (data: CreateUserInput) => {
   if (
     !data.name ||
     !data.email ||
@@ -76,7 +77,7 @@ const validateNewUser = async (data: any) => {
   }
 };
 
-const validateUpdatedUser = async (id: string, data: any) => {
+const validateUpdatedUser = async (id: string, data: UpdateUserInput) => {
   if (!data.name || !data.cpf || !data.cep || !data.number) {
     throw new Error(
       "Nome, CPF, CEP e número são obrigatórios para atualização.",
@@ -102,7 +103,7 @@ const validateUpdatedUser = async (id: string, data: any) => {
   }
 };
 
-export const createUserService = async (data: any) => {
+export const createUserService = async (data: CreateUserInput) => {
   await validateNewUser(data);
 
   const hashedPassword = await bcrypt.hash(data.password, 10);
@@ -143,7 +144,7 @@ export const getUserByIdService = async (id: string) => {
   });
 };
 
-export const updateUserService = async (id: string, data: any) => {
+export const updateUserService = async (id: string, data: UpdateUserInput) => {
   const user = await prisma.user.findUnique({ where: { id } });
   if (!user) {
     throw new Error("Usuário não encontrado.");
@@ -155,7 +156,13 @@ export const updateUserService = async (id: string, data: any) => {
 
   await validateUpdatedUser(id, data);
 
-  const updateData: any = {
+  const updateData: {
+    name: string;
+    cpf: string;
+    cep: string;
+    number: string;
+    password?: string;
+  } = {
     name: data.name,
     cpf: data.cpf,
     cep: data.cep,

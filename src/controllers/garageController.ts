@@ -2,12 +2,16 @@ import { Request, Response } from "express";
 import { Prisma } from "@prisma/client";
 import prisma from "../config/database";
 
-const parsePaginationParam = (value: unknown, fallback: number) => {
-  const parsed = Number(value);
+const parsePaginationParam = (
+  value: string | string[] | undefined,
+  fallback: number,
+) => {
+  const pageString = Array.isArray(value) ? value[0] : value;
+  const parsed = Number(pageString);
   return Number.isInteger(parsed) && parsed > 0 ? parsed : fallback;
 };
 
-const getUser = (req: Request) => (req as any).user?.id as string;
+const getUser = (req: Request) => req.user?.id;
 const getId = (req: Request, param: string) => String(req.params[param]);
 const findProposal = (id: string) =>
   prisma.garage.findUnique({ where: { id } });
@@ -16,7 +20,11 @@ export const createProposal = async (req: Request, res: Response) => {
   const userId = getUser(req);
   if (!userId) return res.status(401).json({ error: "Não autenticado." });
 
-  const { offeredValue, message, carId } = req.body;
+  const { offeredValue, message, carId } = req.body as {
+    offeredValue: number;
+    message?: string;
+    carId: string;
+  };
   if (!carId || offeredValue == null)
     return res
       .status(400)
@@ -54,7 +62,10 @@ export const updateProposal = async (req: Request, res: Response) => {
   if (!userId) return res.status(401).json({ error: "Não autenticado." });
 
   const id = getId(req, "proposalId");
-  const { offeredValue, message } = req.body;
+  const { offeredValue, message } = req.body as {
+    offeredValue: number;
+    message?: string;
+  };
   if (!offeredValue || isNaN(Number(offeredValue)))
     return res.status(400).json({ error: "offeredValue inválido." });
 

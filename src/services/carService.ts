@@ -1,7 +1,27 @@
+import { Prisma } from "@prisma/client";
 import prisma from "../config/database";
 
+type CarWithRelations = Prisma.CarGetPayload<{
+  include: {
+    brand: true;
+    espec: true;
+    images: true;
+    category: true;
+  };
+}>;
+
+type CarWithDetailRelations = Prisma.CarGetPayload<{
+  include: {
+    brand: true;
+    espec: true;
+    images: true;
+    itens: true;
+    category: true;
+  };
+}>;
+
 // 1. Definição clara da função de formatação
-const formatCar = (car: any) => ({
+const formatCar = (car: CarWithRelations) => ({
   id: car.id,
   name: car.name,
   brand: car.brand?.name || "Sem Marca",
@@ -71,7 +91,7 @@ export async function getCarById(id: string) {
   return {
     ...formatted,
     model: car.model,
-    allImages: car.images.map((img: any) => img.url),
+    allImages: car.images.map((img) => img.url),
     status: car.status,
     features, // Agora é um Array: ["Airbag", "Freios ABS", ...]
     specs: {
