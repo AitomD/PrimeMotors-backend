@@ -30,7 +30,6 @@ app.use("/users", authMiddleware, userRoutes);
 app.use("/garage", userGarageRoutes);
 app.use("/favorites", favoriteRoutes);
 
-// 👉 AQUI
 app.use("/cars", carsRoutes);
 
 export default app;
