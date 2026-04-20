@@ -39,5 +39,7 @@ O projeto utiliza Prisma ORM para gerenciamento do banco de dados.
 
 ## 👨‍💻 Desenvolvedores
 
-* Aitom Donatoni
-* @FernandoConsolinRosa11
+## 👨‍💻 Desenvolvedores
+
+- [Aitom Donatoni](https://github.com/AitomD)  
+- [Fernando Consolin](https://github.com/FernandoConsolinRosa11)
