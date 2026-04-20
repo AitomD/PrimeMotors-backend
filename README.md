@@ -1,9 +1,7 @@
 
-## 📌 Sobre o projeto
+## 📌 Sobre o projeto Prime Motors
 
 Este projeto tem como objetivo simular uma aplicação real, focando na construção de uma API para gerenciamento de dados, utilizando operações completas de CRUD (Create, Read, Update e Delete).
-
-O back-end é responsável por toda a lógica da aplicação, comunicação com o banco de dados e tratamento das requisições vindas do front-end.
 
 ## 🛠️ Tecnologias utilizadas
 
@@ -34,8 +32,6 @@ O back-end se comunica com um projeto front-end desenvolvido em React, através 
 ## 🗄️ Banco de dados
 
 O projeto utiliza Prisma ORM para gerenciamento do banco de dados.
-
-## 👨‍💻 Desenvolvedores
 
 ## 👨‍💻 Desenvolvedores
 
