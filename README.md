@@ -34,6 +34,11 @@ O back-end se comunica com um projeto front-end desenvolvido em React, através 
 
 O projeto utiliza Prisma ORM para gerenciamento do banco de dados.
 
+## 🔗 Projeto completo 
+💻 Front-end: (https://github.com/FernandoConsolinRosa11/FrontEnd2026) 
+
+⚙️ Back-end: (https://github.com/AitomD/PrimeMotors-backend)
+
 ## 👨‍💻 Desenvolvedores
 
 - [Aitom Donatoni](https://github.com/AitomD)  
