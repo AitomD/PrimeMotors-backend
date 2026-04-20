@@ -1,6 +1,4 @@
 
-Repositório dedicado ao desenvolvimento do back-end de um sistema web criado durante o módulo de Análise e Desenvolvimento de Sistemas.
-
 ## 📌 Sobre o projeto
 
 Este projeto tem como objetivo simular uma aplicação real, focando na construção de uma API para gerenciamento de dados, utilizando operações completas de CRUD (Create, Read, Update e Delete).
