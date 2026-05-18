@@ -10,7 +10,7 @@ import {
 } from "../services/favoriteService";
 
 const parsePaginationParam = (
-  value: string | string[] | ParsedQs | undefined,
+  value: string | string[] | ParsedQs | ParsedQs[] | undefined,
   fallback: number,
 ) => {
   const pageString = Array.isArray(value) ? value[0] : value;
@@ -30,8 +30,8 @@ export const listFavoritesController = async (req: Request, res: Response) => {
     return res.status(403).json({ error: "Acesso negado." });
 
   try {
-    const page = parsePaginationParam(req.query.page, 1);
-    const limit = parsePaginationParam(req.query.limit, 10);
+    const page = parsePaginationParam(req.query.page as any, 1);
+    const limit = parsePaginationParam(req.query.limit as any, 10);
     return res
       .status(200)
       .json(await getFavoritesByUser(requestedUserId, page, limit));

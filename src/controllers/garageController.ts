@@ -115,8 +115,8 @@ export const getUserProposals = async (req: Request, res: Response) => {
     return res.status(403).json({ error: "Acesso negado." });
 
   try {
-    const page = parsePaginationParam(req.query.page, 1);
-    const limit = parsePaginationParam(req.query.limit, 10);
+    const page = parsePaginationParam(req.query.page as any, 1);
+    const limit = parsePaginationParam(req.query.limit as any, 10);
 
     const proposals = await prisma.garage.findMany({
       where: { userId },

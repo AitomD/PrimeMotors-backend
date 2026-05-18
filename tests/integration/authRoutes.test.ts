@@ -7,6 +7,7 @@ jest.mock('../../src/services/userService');
 jest.mock('bcrypt');
 const mockedService = userService as any;
 const mockedBcrypt = bcrypt as jest.Mocked<typeof bcrypt>;
+(mockedBcrypt.compare as jest.Mock).mockResolvedValue(true);
 
 describe('Auth Routes Integration', () => {
   beforeAll(() => {
@@ -17,7 +18,7 @@ describe('Auth Routes Integration', () => {
   it('POST /auth/login deve retornar token se válido', async () => {
     const mockUser = { id: '123', email: 'test@test.com', password: 'hashed', active: true };
     mockedService.loginService = jest.fn().mockResolvedValue(mockUser);
-    mockedBcrypt.compare.mockResolvedValue(true);
+    //mockedBcrypt.compare.mockResolvedValue(true);
 
     const response = await request(app)
       .post('/auth/login')
