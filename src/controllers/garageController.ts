@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { Prisma } from "@prisma/client";
+import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library"
 import prisma from "../config/database";
 
 const parsePaginationParam = (
@@ -44,9 +44,9 @@ export const createProposal = async (req: Request, res: Response) => {
     });
 
     return res.status(201).json(proposal);
-  } catch (error) {
+  } catch (error: any) {
     if (
-      error instanceof Prisma.PrismaClientKnownRequestError &&
+      error instanceof PrismaClientKnownRequestError &&
       error.code === "P2002"
     )
       return res
@@ -81,7 +81,7 @@ export const updateProposal = async (req: Request, res: Response) => {
       data: { offeredValue: Number(offeredValue), message },
     });
     return res.status(200).json(updated);
-  } catch (error) {
+  } catch (error: any) {
     console.error(error);
     return res.status(500).json({ error: "Erro ao atualizar proposta." });
   }
@@ -102,7 +102,7 @@ export const deleteProposal = async (req: Request, res: Response) => {
 
     await prisma.garage.delete({ where: { id } });
     return res.status(200).json({ message: "Excluída com sucesso." });
-  } catch (error) {
+  } catch (error: any) {
     console.error(error);
     return res.status(500).json({ error: "Erro ao excluir proposta." });
   }
@@ -134,7 +134,7 @@ export const getUserProposals = async (req: Request, res: Response) => {
     });
 
     return res.status(200).json(
-      proposals.map((p) => ({
+      proposals.map((p: any) => ({
         id: p.id,
         offeredValue: p.offeredValue,
         status: p.status,
@@ -144,7 +144,7 @@ export const getUserProposals = async (req: Request, res: Response) => {
         date_offer: p.date_offer,
       })),
     );
-  } catch (error) {
+  } catch (error: any) {
     console.error(error);
     return res.status(500).json({ error: "Erro ao buscar propostas." });
   }

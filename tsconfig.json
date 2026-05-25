@@ -17,10 +17,10 @@
     // Organizadores de saída
     "sourceMap": true,
     "declaration": true,
-    "rootDir": "./",
+    "rootDir": "./src",
     "outDir": "./dist"
   },
-  "include": ["src/**/*", "tests/**/*"],
+  "include": ["src/**/*"],
   "ts-node": {
     "esm": true,
     "experimentalSpecifierResolution": "node"

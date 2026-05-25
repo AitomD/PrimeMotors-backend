@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import type { ParsedQs } from "qs";
-import { Prisma } from "@prisma/client";
+import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library"
 import {
   createFavorite,
   deleteFavorite,
@@ -35,7 +35,7 @@ export const listFavoritesController = async (req: Request, res: Response) => {
     return res
       .status(200)
       .json(await getFavoritesByUser(requestedUserId, page, limit));
-  } catch (error) {
+  } catch (error: any) {
     console.error(error);
     return res.status(500).json({ error: "Erro ao buscar lista de desejos." });
   }
@@ -60,10 +60,10 @@ export const toggleFavoriteController = async (req: Request, res: Response) => {
 
     const favorite = await createFavorite(authenticatedUserId, carId, message);
     return res.status(201).json({ message: "Favorito adicionado.", favorite });
-  } catch (error) {
+  } catch (error: any) {
     console.error(error);
     if (
-      error instanceof Prisma.PrismaClientKnownRequestError &&
+      error instanceof PrismaClientKnownRequestError &&
       error.code === "P2002"
     )
       return res.status(409).json({ error: "Favorito já existe." });
@@ -84,10 +84,10 @@ export const createFavoriteController = async (req: Request, res: Response) => {
   try {
     const favorite = await createFavorite(authenticatedUserId, carId, message);
     return res.status(201).json(favorite);
-  } catch (error) {
+  } catch (error: any) {
     console.error(error);
     if (
-      error instanceof Prisma.PrismaClientKnownRequestError &&
+      error instanceof PrismaClientKnownRequestError &&
       error.code === "P2002"
     )
       return res.status(409).json({ error: "Favorito já existe." });
@@ -108,7 +108,7 @@ export const deleteFavoriteController = async (req: Request, res: Response) => {
     if (!deleted)
       return res.status(404).json({ error: "Favorito não encontrado." });
     return res.status(200).json({ message: "Favorito removido." });
-  } catch (error) {
+  } catch (error: any) {
     console.error(error);
     return res.status(500).json({ error: "Erro ao remover favorito." });
   }
@@ -137,7 +137,7 @@ export const updateFavoriteMessageController = async (
     if (!updated)
       return res.status(404).json({ error: "Favorito não encontrado." });
     return res.status(200).json(updated);
-  } catch (error) {
+  } catch (error: any) {
     console.error(error);
     return res.status(500).json({ error: "Erro ao atualizar anotação." });
   }
