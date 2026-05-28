@@ -7,7 +7,7 @@
 
 */
 -- AlterTable
-ALTER TABLE `garage` DROP COLUMN `date_buy`,
+ALTER TABLE `Garage` DROP COLUMN `date_buy`,
     ADD COLUMN `date_offer` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     ADD COLUMN `message` TEXT NULL,
     ADD COLUMN `offeredValue` DECIMAL(10, 2) NOT NULL,

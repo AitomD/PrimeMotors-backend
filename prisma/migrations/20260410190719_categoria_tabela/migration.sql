@@ -1,5 +1,5 @@
 -- AlterTable
-ALTER TABLE `car` ADD COLUMN `categoryId` VARCHAR(191) NULL;
+ALTER TABLE `Car` ADD COLUMN `categoryId` VARCHAR(191) NULL;
 
 -- CreateTable
 CREATE TABLE `Category` (

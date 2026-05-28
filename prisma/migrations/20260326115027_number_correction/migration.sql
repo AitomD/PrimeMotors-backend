@@ -1,5 +1,5 @@
 -- DropIndex
-DROP INDEX `User_number_key` ON `user`;
+DROP INDEX `User_number_key` ON `User`;
 
 -- AlterTable
-ALTER TABLE `user` MODIFY `number` VARCHAR(191) NULL;
+ALTER TABLE `User` MODIFY `number` VARCHAR(191) NULL;
