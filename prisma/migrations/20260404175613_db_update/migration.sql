@@ -9,10 +9,10 @@
 
 */
 -- DropForeignKey
-ALTER TABLE `cons` DROP FOREIGN KEY `Cons_carId_fkey`;
+ALTER TABLE `Cons` DROP FOREIGN KEY `Cons_carId_fkey`;
 
 -- AlterTable
-ALTER TABLE `itens` DROP COLUMN `alarme`,
+ALTER TABLE `Itens` DROP COLUMN `alarme`,
     DROP COLUMN `banco_de_couro`,
     DROP COLUMN `computador_bordo`,
     DROP COLUMN `controle_cruzeiro`,
@@ -22,4 +22,4 @@ ALTER TABLE `itens` DROP COLUMN `alarme`,
     ADD COLUMN `onBoard_computer` BOOLEAN NOT NULL DEFAULT false;
 
 -- DropTable
-DROP TABLE `cons`;
+DROP TABLE `Cons`;
