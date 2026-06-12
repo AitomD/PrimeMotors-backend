@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "setup": "cp .env.example .env && npm install",
+    "prepare": "husky install",
     "start": "node dist/server.js",
     "dev": "tsx watch src/server.ts",
     "test": "jest",
@@ -47,6 +48,7 @@
     "@types/jsonwebtoken": "^9.0.10",
     "@types/node": "^25.6.0",
     "@types/supertest": "^7.2.0",
+    "husky": "^9.1.7",
     "jest": "^30.3.0",
     "prisma": "^5.22.0",
     "supertest": "^7.2.2",
