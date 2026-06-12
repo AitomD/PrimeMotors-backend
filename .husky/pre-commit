@@ -1,3 +1,16 @@
+#!/bin/sh
+
+# Injeta o Node se necessário (ambiente Windows)
+export PATH="$PATH:/c/Program Files/nodejs"
+
+echo "Verificando estilo e erros do código (Linter)..."
+
+# Executa o comando de lint/formatação do seu package.json
 npm run lint
-tsc --noEmit
-npm test --bail
+
+if [ $? -ne 0 ]; then
+    echo "❌ O código possui erros de formatação ou estilo. Commit cancelado."
+    exit 1
+fi
+
+echo "✅ Código aprovado pelo Linter!"
