@@ -8,7 +8,7 @@ export const register = async (req: Request, res: Response) => {
   try {
     const data = req.body as CreateUserInput;
     const newUser = await createUserService(data);
-    return res.status(201).json(newUser);
+    return res.status(201).json({ user: newUser });
   } catch (error) {
     const message =
       error instanceof Error ? error.message : "Erro desconhecido";
