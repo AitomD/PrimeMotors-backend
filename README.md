@@ -43,3 +43,61 @@ O projeto utiliza Prisma ORM para gerenciamento do banco de dados.
 
 - [Aitom Donatoni](https://github.com/AitomD)  
 - [Fernando Consolin](https://github.com/FernandoConsolinRosa11)
+
+---
+
+## 🚀 Uso do backend
+
+### Pré-requisitos
+
+- Node.js 18+ instalado
+- Docker e Docker Compose instalados
+- Um banco MySQL disponível ou o serviço via Docker Compose dentro de `PrimeMotors-docker`
+
+### Instalação
+
+1. Copie o template de variáveis:
+   ```bash
+   cd PrimeMotors-backend
+   cp .env.example .env
+   npm install
+   ```
+2. Atualize o arquivo `.env` com as credenciais reais do banco.
+
+### Executando localmente
+
+```bash
+npm run dev
+```
+
+### Rodando o build
+
+```bash
+npm run build
+npm start
+```
+
+### Testes
+
+```bash
+npm test
+```
+
+### Husky
+
+O backend agora usa Husky para prevenir commits/pushes sem testes.
+
+- `npm install` instala o hook de Husky automaticamente via `prepare`
+- `git commit` dispara o hook `pre-commit`
+- `git push` dispara o hook `pre-push`
+
+### Hooks configurados
+
+- `.husky/pre-commit` → `npm test`
+- `.husky/pre-push` → `npm test`
+
+### Observações de segurança
+
+- Não versionar arquivos `.env`
+- Use `.env.example` para compartilhar variáveis de ambiente
+- Rotacione segredos antes de subir para repositório

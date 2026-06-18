@@ -44,6 +44,6 @@ describe('Auth Routes Integration', () => {
       .post('/auth/users')
       .send({ name: 'Novo', email: 'new@test.com', password: '123' });
     expect(response.status).toBe(201);
-    expect(response.body).toEqual(mockUser);
+    expect(response.body).toEqual({ user: mockUser });
   });
 });
