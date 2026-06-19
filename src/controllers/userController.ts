@@ -4,6 +4,7 @@ import {
   getUserByIdService,
   updateUserService,
   deactivateUserService,
+  updateUserAvatarService,
 } from "../services/userService";
 
 export const getUserController = async (req: Request, res: Response) => {
@@ -78,5 +79,31 @@ export const deleteUserController = async (req: Request, res: Response) => {
       return res.status(404).json({ message: error.message });
     }
     return res.status(500).json({ message: "Erro ao deletar" });
+  }
+};
+
+// Upload da imagem de usuario
+export const updateAvatar = async (req: Request, res: Response) => {
+  try {
+    //apenas o próprio usuário possa alterar seu avatar
+    const tokenUserId = req.user?.id;
+    const id = Array.isArray(req.params.id) ? req.params.id[0] : req.params.id;
+
+    if (!tokenUserId || tokenUserId !== id) {
+      return res.status(403).json({ message: "Acesso negado." });
+    }
+
+    const { avatarUrl } = req.body;
+
+    if (!avatarUrl) {
+      return res.status(400).json({ message: "URL do avatar é obrigatória." });
+    }
+
+    const user = await updateUserAvatarService(id, avatarUrl);
+    
+    return res.status(200).json(user);
+  } catch (error) {
+    console.error("Erro no updateAvatar:", error);
+    return res.status(500).json({ message: "Erro ao atualizar avatar" });
   }
 };
