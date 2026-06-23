@@ -165,6 +165,7 @@ export const getUserByIdService = async (id: string) => {
       cpf: true,
       cep: true,
       number: true,
+      avatarUrl: true,
     },
   });
 };

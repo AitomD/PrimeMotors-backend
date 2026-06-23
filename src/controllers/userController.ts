@@ -22,6 +22,10 @@ export const getUserController = async (req: Request, res: Response) => {
         .status(404)
         .json({ message: "Usuário não encontrado no banco" });
     }
+    
+    res.set("Cache-Control", "no-store, no-cache, must-revalidate, proxy-revalidate");
+    res.set("Pragma", "no-cache");
+    res.set("Expires", "0");
     return res.json(user);
   } catch (error) {
     return res.status(500).json({ error: "Erro interno no servidor" });
@@ -82,7 +86,6 @@ export const deleteUserController = async (req: Request, res: Response) => {
   }
 };
 
-// Upload da imagem de usuario
 export const updateAvatar = async (req: Request, res: Response) => {
   try {
     //apenas o próprio usuário possa alterar seu avatar
@@ -100,7 +103,7 @@ export const updateAvatar = async (req: Request, res: Response) => {
     }
 
     const user = await updateUserAvatarService(id, avatarUrl);
-    
+
     return res.status(200).json(user);
   } catch (error) {
     console.error("Erro no updateAvatar:", error);
