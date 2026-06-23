@@ -6,6 +6,8 @@ import userRoutes from "./routes/userRoutes";
 import carsRoutes from "./routes/carRoutes";
 import favoriteRoutes from "./routes/favoriteRoutes";
 import { authMiddleware } from "./middlewares/authMiddleware";
+import testDriveRoutes from "./routes/testDriveRoutes";
+
 import {
   getUserController,
   updateUserController,
@@ -30,7 +32,6 @@ app.use("/auth", authRoutes);
 app.use("/users", authMiddleware, userRoutes);
 app.use("/garage", userGarageRoutes);
 app.use("/favorites", favoriteRoutes);
-
 app.use("/cars", carsRoutes);
-
+app.use("/test-drive", testDriveRoutes);
 export default app;
