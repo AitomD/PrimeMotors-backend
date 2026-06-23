@@ -33,5 +33,5 @@ app.use("/users", authMiddleware, userRoutes);
 app.use("/garage", userGarageRoutes);
 app.use("/favorites", favoriteRoutes);
 app.use("/cars", carsRoutes);
-app.use("/test-drive", testDriveRoutes);
+app.use("/test-drives", testDriveRoutes);
 export default app;

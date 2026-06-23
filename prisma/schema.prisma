@@ -159,19 +159,15 @@ enum TestDriveStatus {
 }
 
 model TestDrive {
-  id          String         @id @default(uuid())
-  scheduledAt DateTime       // data/hora escolhida pelo usuário
-  createdAt   DateTime       @default(now())
-  updatedAt   DateTime       @updatedAt
-  status      TestDriveStatus @default(Pendente)
-  message     String?        @db.Text
+  id          String          @id @default(uuid())
+  scheduledAt DateTime
+  carId       String
+  userId      String
+  message     String?
+  status      TestDriveStatus @default(Pendente) // <- ADICIONE ESTA LINHA
 
-  // Relações
-  carId  String
-  userId String
-  car    Car    @relation(fields: [carId], references: [id], onDelete: Cascade)
-  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  car         Car             @relation(fields: [carId], references: [id], onDelete: Cascade)
+  user        User            @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  @@unique([userId, carId, scheduledAt]) // evita duplicata no mesmo horário
-  @@map("TestDrive")
+  @@unique([userId, carId, scheduledAt])
 }
