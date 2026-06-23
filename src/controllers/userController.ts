@@ -88,7 +88,7 @@ export const updateAvatar = async (req: Request, res: Response) => {
     //apenas o próprio usuário possa alterar seu avatar
     const tokenUserId = req.user?.id;
     const id = Array.isArray(req.params.id) ? req.params.id[0] : req.params.id;
-
+    console.log("USER DO MIDDLEWARE:", req.user);
     if (!tokenUserId || tokenUserId !== id) {
       return res.status(403).json({ message: "Acesso negado." });
     }

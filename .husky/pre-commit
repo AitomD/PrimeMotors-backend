@@ -1,12 +1,12 @@
 #!/bin/sh
 
-# Injeta o Node se necessário (ambiente Windows)
-export PATH="$PATH:/c/Program Files/nodejs"
+# Tenta encontrar o node no PATH do Windows de forma mais abrangente
+export PATH="$PATH:/c/Program Files/nodejs:/c/Program Files/nodejs/bin:/c/Users/$USER/AppData/Roaming/npm"
 
 echo "Verificando estilo e erros do código (Linter)..."
 
-# Executa o comando de lint/formatação do seu package.json
-npm run lint
+# Usa o npx, que é mais seguro para rodar binários locais
+npx eslint .
 
 if [ $? -ne 0 ]; then
     echo "❌ O código possui erros de formatação ou estilo. Commit cancelado."
