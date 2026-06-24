@@ -34,7 +34,7 @@ model User {
   active    Boolean    @default(true)
   garages   Garage[]
   favorites Favorite[]
-
+  testDrives TestDrive[]
   @@map("User")
 }
 
@@ -61,6 +61,7 @@ model Car {
   images    Image[]
   garages   Garage[]
   favorites Favorite[]
+  testDrives TestDrive[]
 }
 
 model Brand {
@@ -147,4 +148,26 @@ enum ProposalStatus {
   Aceita // Proposta aprovada
   Recusada // Proposta negada
   ContraProposta // Admin sugeriu outro valor
+}
+
+
+enum TestDriveStatus {
+  Pendente
+  Confirmado
+  Cancelado
+  Realizado
+}
+
+model TestDrive {
+  id          String          @id @default(uuid())
+  scheduledAt DateTime
+  carId       String
+  userId      String
+  message     String?
+  status      TestDriveStatus @default(Pendente) // <- ADICIONE ESTA LINHA
+
+  car         Car             @relation(fields: [carId], references: [id], onDelete: Cascade)
+  user        User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, carId, scheduledAt])
 }
