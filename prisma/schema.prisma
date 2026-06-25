@@ -32,6 +32,9 @@ model User {
   password  String
   number    String?
   active    Boolean    @default(true)
+  
+  avatarUrl String?    @map("avatar_url")
+  
   garages   Garage[]
   favorites Favorite[]
   testDrives TestDrive[]

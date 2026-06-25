@@ -4,6 +4,7 @@ import {
   getUserByIdService,
   updateUserService,
   deactivateUserService,
+  updateUserAvatarService,
 } from "../services/userService";
 
 export const getUserController = async (req: Request, res: Response) => {
@@ -21,6 +22,10 @@ export const getUserController = async (req: Request, res: Response) => {
         .status(404)
         .json({ message: "Usuário não encontrado no banco" });
     }
+
+    res.set("Cache-Control", "no-store, no-cache, must-revalidate, proxy-revalidate");
+    res.set("Pragma", "no-cache");
+    res.set("Expires", "0");
     return res.json(user);
   } catch (error) {
     return res.status(500).json({ error: "Erro interno no servidor" });
@@ -78,5 +83,29 @@ export const deleteUserController = async (req: Request, res: Response) => {
       return res.status(404).json({ message: error.message });
     }
     return res.status(500).json({ message: "Erro ao deletar" });
+  }
+};
+
+export const updateAvatar = async (req: Request, res: Response) => {
+  try {
+    //apenas o próprio usuário possa alterar seu avatar
+    const tokenUserId = req.user?.id;
+    const id = Array.isArray(req.params.id) ? req.params.id[0] : req.params.id;
+    console.log("USER DO MIDDLEWARE:", req.user);
+    if (!tokenUserId || tokenUserId !== id) {
+      return res.status(403).json({ message: "Acesso negado." });
+    }
+
+    const { avatarUrl } = req.body;
+
+    const user = await updateUserAvatarService(
+      id,
+      avatarUrl ?? null
+    );
+
+    return res.status(200).json(user);
+  } catch (error) {
+    console.error("Erro no updateAvatar:", error);
+    return res.status(500).json({ message: "Erro ao atualizar avatar" });
   }
 };

@@ -2,6 +2,6 @@ import app from './app';
 
 const port = Number(process.env.PORT) || 3000;
 
-app.listen(port, () => {
-    console.log(`🚀 Servidor online em http://localhost:${port}`);
+app.listen(port, '0.0.0.0', () => {
+  console.log(`🚀 Servidor online na porta ${port}`);
 });
