@@ -165,6 +165,7 @@ export const getUserByIdService = async (id: string) => {
       cpf: true,
       cep: true,
       number: true,
+      avatarUrl: true,
     },
   });
 };
@@ -224,5 +225,13 @@ export const deactivateUserService = async (id: string) => {
   return await prisma.user.update({
     where: { id },
     data: { active: false },
+  });
+};
+
+export const updateUserAvatarService = async (id: string, avatarUrl: string | null) => {
+  return await prisma.user.update({
+    where: { id },
+    data: { avatarUrl },
+    
   });
 };
