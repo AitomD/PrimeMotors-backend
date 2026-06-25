@@ -228,7 +228,7 @@ export const deactivateUserService = async (id: string) => {
   });
 };
 
-export const updateUserAvatarService = async (id: string, avatarUrl: string) => {
+export const updateUserAvatarService = async (id: string, avatarUrl: string | null) => {
   return await prisma.user.update({
     where: { id },
     data: { avatarUrl },

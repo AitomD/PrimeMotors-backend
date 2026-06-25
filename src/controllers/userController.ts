@@ -22,7 +22,7 @@ export const getUserController = async (req: Request, res: Response) => {
         .status(404)
         .json({ message: "Usuário não encontrado no banco" });
     }
-    
+
     res.set("Cache-Control", "no-store, no-cache, must-revalidate, proxy-revalidate");
     res.set("Pragma", "no-cache");
     res.set("Expires", "0");
@@ -98,11 +98,10 @@ export const updateAvatar = async (req: Request, res: Response) => {
 
     const { avatarUrl } = req.body;
 
-    if (!avatarUrl) {
-      return res.status(400).json({ message: "URL do avatar é obrigatória." });
-    }
-
-    const user = await updateUserAvatarService(id, avatarUrl);
+    const user = await updateUserAvatarService(
+      id,
+      avatarUrl ?? null
+    );
 
     return res.status(200).json(user);
   } catch (error) {
